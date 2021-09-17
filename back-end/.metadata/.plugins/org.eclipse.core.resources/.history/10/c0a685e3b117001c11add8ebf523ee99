@@ -1,0 +1,36 @@
+package com.programar.todo.services;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.programar.todo.domain.Todo;
+import com.programar.todo.repositories.TodoRepository;
+
+@Service
+public class DBService {
+
+	@Autowired
+	TodoRepository todoRepository;
+
+	public void instanciaBaseDeDados() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+		Todo t1 = new Todo(null, "Estudar", "Estudar Spring Boot 2.X.X e Anguar 2+",
+				LocalDateTime.parse("25/03/2022 10:23", formatter), false);
+		
+		Todo t2 = new Todo(null, "ativ", "Atividade fisica",
+				LocalDateTime.parse("17/03/2022 10:23", formatter), true);
+		
+		Todo t3 = new Todo(null, "ler", "ler livro da faculdade",
+				LocalDateTime.parse("18/03/2022 10:23", formatter), false);
+		
+		Todo t4 = new Todo(null, "Meditar", "Meditar 30 min's early",
+				LocalDateTime.parse("19/03/2022 10:23", formatter), true);
+
+		
+		todoRepository.saveAll(Arrays.asList(t1,t2,t3,t4));
+	}
+}
